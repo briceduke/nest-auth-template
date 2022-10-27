@@ -2,12 +2,11 @@ import { NotFoundException } from '@nestjs/common';
 import { FilterQuery, Model, UpdateQuery } from 'mongoose';
 
 import { AbstractSchemaFactory } from './abstract.factory';
-import { AbstractModel } from './abstract.model';
 import { AbstractSchema } from './abstract.schema';
 
 export abstract class AbstractRepository<
   TSchema extends AbstractSchema,
-  TModel extends AbstractModel,
+  TModel,
 > {
   constructor(
     protected readonly model: Model<TSchema>,

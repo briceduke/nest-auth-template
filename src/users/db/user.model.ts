@@ -4,6 +4,7 @@ export class UserModel {
     private readonly username: string,
     private readonly email: string,
     private readonly password?: string,
+    private readonly refreshToken?: string,
   ) {}
 
   getId(): string {
@@ -20,5 +21,9 @@ export class UserModel {
 
   getPassword(): string {
     return this.password;
+  }
+
+  getRefreshToken(): string {
+    return this.refreshToken;
   }
 }

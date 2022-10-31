@@ -15,6 +15,7 @@ export class UserSchemaFactory
       username: model.getUsername(),
       email: model.getEmail(),
       password: model.getPassword(),
+      refreshToken: model.getRefreshToken(),
     };
   }
 

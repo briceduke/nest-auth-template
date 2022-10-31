@@ -12,4 +12,7 @@ export class UserSchema extends AbstractSchema {
 
   @Prop()
   readonly password: string;
+
+  @Prop()
+  readonly refreshToken: string;
 }

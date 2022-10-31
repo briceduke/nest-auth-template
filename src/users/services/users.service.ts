@@ -69,4 +69,31 @@ export class UsersService {
 
     return this.userSchemaFactory.createFromSchema(userDoc);
   }
+
+  async setRefreshToken(refreshToken: string, userId: string) {
+    const hashed = await bcrypt.hash(refreshToken, 13);
+
+    await this.usersRepository.findOneAndUpdate(
+      { _id: userId },
+      { refreshToken: hashed },
+    );
+  }
+
+  async removeRefreshToken(userId: string) {
+    await this.usersRepository.findOneAndUpdate(
+      { _id: userId },
+      { refreshToken: null },
+    );
+  }
+
+  async getUserIfRefreshTokenMatches(
+    refreshToken: string,
+    userId: string,
+  ): Promise<UserModel> {
+    const user = await this.usersRepository.findOne({ _id: userId });
+
+    const isValid = await bcrypt.compare(refreshToken, user.refreshToken);
+
+    if (isValid) return this.userSchemaFactory.createFromSchema(user);
+  }
 }

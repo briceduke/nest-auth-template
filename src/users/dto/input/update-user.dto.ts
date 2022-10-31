@@ -13,4 +13,7 @@ export class UpdateUserDto {
   @MinLength(8)
   @MaxLength(64)
   readonly password: string;
+
+  @IsString()
+  readonly refreshToken: string;
 }
